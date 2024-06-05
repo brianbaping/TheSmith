@@ -1,6 +1,7 @@
 # The Smith
 
 This repository contains the prototype for a The Smith ABC converter. 
+The Forge is the engine for the abc conversion process.
 
 ## Dependencies
 
