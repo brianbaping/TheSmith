@@ -1,6 +1,7 @@
 # The Smith
 
 This repository contains the prototype for a The Smith ABC converter. 
+The Forge is the engine for the abc conversion process.
 
 ## Dependencies
 
@@ -24,4 +25,8 @@ After the build is complete, you can run the application by executing the Forge.
 ## Contributing
 
 Contributions are welcome. Please open an issue or submit a pull request.
+
+## License
+
+The source code for the site is licensed under the MIT license, which you can find in the MIT-LICENSE.txt file.
 
