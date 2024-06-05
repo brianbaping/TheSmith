@@ -1,0 +1,64 @@
+SONG*01*The Racoon Bard*Vydor*5*0*TSO*90*1.0*0*0*0
+ABCTRACK*01*001*Clarinet*71*0*6*TOP*2*10000*0*100*3*0.000000*0.000000*0*CLARINET
+MIDTRACK*001*0001*3*0*0*0*1*1*0*0*0
+ABCTRACK*END
+ABCTRACK*01*002*Lute of Ages 1*11*0*6*TOP*2*10000*0*100*3*0.000000*0.000000*0*LUTEOFAGES
+MIDTRACK*002*0002*4*0*0*0*1*1*0*0*0
+MIDTRACK*002*0003*5*0*-30*0*1*1*0*0*0
+ABCTRACK*END
+ABCTRACK*01*003*Lute of Ages 2*12*0*6*TOP*2*10000*0*100*3*0.000000*0.000000*0*LUTEOFAGES
+MIDTRACK*003*0004*7*0*0*0*1*1*0*0*0
+ABCTRACK*END
+SONG*END
+
+
+
+How to read the above lines
+
+
+SONG LINES
+position 0 - Song Marker
+position 1 - Song ID (indentifier to the song)
+position 2 - Song Title
+position 3 - Transcriber
+position 4 - Speed Up
+position 5 - Pitch
+position 6 - Style
+position 7 - Volume
+position 8 - Compression
+position 9 - Pitch Guess
+position 10 - Back Folding
+position 11 - Fade Out Length
+
+INSTURMENT LINES
+position 0 - Instrument Marker
+position 1 - Song ID  (the song to which this track belongs)
+position 2 - Instrument ID
+position 3 - ABC Title
+position 4 - ABC Index
+position 5 - Volume Adjust
+position 6 - Polyphony
+position 7 - Polyphony Direction
+position 8 - Duration
+position 9 - Duration Length
+position 10 - Panning 1
+position 11 - Panning 2
+position 12 - Panning 3
+position 13 - ffAmp
+position 14 - ffShift
+position 15 - ffCoupling
+position 16 - Instrument
+
+MIDTRACK LINES
+position 0 - Midi Track Marker
+position 1 - Instrument ID (the instrument to which the track belongs
+position 2 - Midi Track ID
+position 3 - Mid track number
+position 4 - Pitch
+position 5 - Volume
+position 6 - Delay
+position 7 - Priority
+position 8 - Divide
+position 9 - Divide Part
+position 10 - IMFMAP
+position 11 - ISFMAP

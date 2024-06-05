@@ -1,0 +1,10 @@
+# Ignore all .log files
+*.log
+
+# Ignore all files ending in .tmp
+*.tmp
+
+# Ignore the build directory
+build/
+
+

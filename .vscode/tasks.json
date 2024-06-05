@@ -1,0 +1,30 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Forge Debug",
+            "type": "cppbuild",
+            "command": "C:\\mingw64\\bin\\g++.exe",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${workspaceFolder}\\src\\*.cpp",
+				"-o",
+				"${workspaceFolder}\\build\\debug\\Forge.exe",
+				"-I",
+				"${workspaceFolder}\\include",
+            ],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "compiler: C:\\mingw64\\bin\\g++.exe"
+        }
+    ]
+}
