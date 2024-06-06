@@ -71,6 +71,10 @@ int main(int argc, char** argv) {
 	FileParser fileParser;
 	ParsedData parsedOutData = fileParser.parseFile(configfilename);
 
+	int songsize = parsedOutData.Instruments[0].Tracks.size();
+	string damt = parsedOutData.Instruments[0].Tracks[0].TrackConfigs["track"];
+
+
 	// Process the midi file
 	processFile(midifilename, outputfilename);
 

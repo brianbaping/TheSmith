@@ -13,7 +13,7 @@
                 "-m ${workspaceFolder}\\resource\\Albatros.mid", 
                 "-o Albatros.abc", 
                 "-c ${workspaceFolder}\\resource\\Albatros.map", 
-                "-d -1"
+                "-d 0"
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}\\build\\debug",

@@ -226,7 +226,7 @@ ParsedData MapParser::parse(const string& filePath)
             if (linevector.size() > 2)
             {
                 value = trim(linevector[2]);
-                instrument.addConfig("durationdirection", value);
+                instrument.addConfig("durationamount", value);
             	get("logger")->trace("duration amount: {}", value);
             }
             continue;
