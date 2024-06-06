@@ -1,58 +1,89 @@
+//
+// Authors:   	  Bruzo of Gladden, Vydor of Landroval
+// Creation Date: June 4, 2024
+// Last Modified: June 4, 2024
+// URL:           https://github.com
+//
+// Description:   Collection of various functions used in the Forge program. 
+//
+
 #include "Logger.h"
 
-// Static method to get the single instance of Logger
+using namespace std;
+
+/**
+ * @brief get the single instance of the Logger
+ */
 Logger& Logger::getInstance() {
     static Logger instance; // Guaranteed to be destroyed and instantiated on first use
     return instance;
 }
 
-// Method to set the log level
+/**
+ * @brief set the log level
+ * @param level the log level
+ */
 void Logger::setLogLevel(LogLevel level) {
-    std::lock_guard<std::mutex> lock(mutex_);
+    lock_guard<mutex> lock(mutex_);
     logLevel_ = level;
     if (logLevel_ == NONE && logfile_.is_open()) {
         logfile_.close();
     }
 }
 
-// Method to get the current log level
+/**
+ * @brief get the current log level
+ * @return the log level
+ */
 Logger::LogLevel Logger::getLogLevel() {
-    std::lock_guard<std::mutex> lock(mutex_);
+    lock_guard<mutex> lock(mutex_);
     return logLevel_;
 }
 
-// Method to log messages with a specific log level
-void Logger::log(const std::string& message, LogLevel level) {
-    std::lock_guard<std::mutex> lock(mutex_);
+/**
+ * @brief log messages with a specific log level
+ * @param message the message to log *DEFAULT is INFO
+ * @param level the log level
+ */
+void Logger::log(const string& message, LogLevel level) {
+    lock_guard<mutex> lock(mutex_);
     if (logLevel_ == NONE || level > logLevel_) {
         return;
     }
     if (logfile_.is_open()) {
-        logfile_ << message << std::endl;
+        logfile_ << message << endl;
     }
 }
 
-// Method to set log file
-void Logger::setLogFile(const std::string& filename) {
-    std::lock_guard<std::mutex> lock(mutex_);
+/**
+ * @brief set log file
+ * @param filename the log file name
+ */
+void Logger::setLogFile(const string& filename) {
+    lock_guard<mutex> lock(mutex_);
     if (logLevel_ == NONE) {
         return;
     }
     if (logfile_.is_open()) {
         logfile_.close();
     }
-    logfile_.open(filename, std::ios::app);
+    logfile_.open(filename, ios::app);
     if (!logfile_) {
-        throw std::runtime_error("Unable to open log file: " + filename);
+        throw runtime_error("Unable to open log file: " + filename);
     }
 }
 
+/**
+ * @brief get log level by index
+ * @param index the index of the log level
+ * @return the log level
+ */
 Logger::LogLevel Logger::getLogLevelByIndex(int index) {
     switch(index) {
         case 0: return Logger::LogLevel::NONE;
         case 1: return Logger::LogLevel::LOG_ERROR;
         case 2: return Logger::LogLevel::LOG_INFO;
-        default: throw std::out_of_range("Invalid index for LogLevel");
+        default: throw out_of_range("Invalid index for LogLevel");
     }
 }
 

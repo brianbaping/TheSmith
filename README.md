@@ -8,7 +8,7 @@ The Forge is the engine for the abc conversion process.
 The project uses the following libraries:
 
 - Midi Reader [midifile](https://github.com/craigsapp/midifile)
-- spdLogger [spdlogger](https://github.com/gabime/spdlog)
+- docttest [doctest](https://github.com/doctest/doctest)
 
 ## Installation
 
