@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <string.h>
 
-using namespace spdlog;
+//using namespace spdlog;
 using namespace std;
 
 // Function prototype
@@ -51,43 +51,45 @@ ParsedData MapParser::parse(const string& filePath)
     string value2;
 
     // Write to the log file   
-	get("logger")->trace("Parsing file: {}", filePath);
+	//get("logger")->trace("Parsing file: {}", filePath);
+    Logger& logger = Logger::getInstance();
 
     // Read the Song Name
     getline(file, line);
     value = parseline(line, "SongName", ':');
     result.addConfig("SongName", value);
-	get("logger")->trace("SongName: {}", value);
+	//get("logger")->trace("SongName: {}", value);
+    logger.log("SongName: " + value);
     
     // Read the Speed Modifier
     getline(file, line);
     value = parseline(line, "SpeedModifier", ':');
     result.addConfig("SpeedModifier", value);
-	get("logger")->trace("SpeedModifier: {}", value);
+	//get("logger")->trace("SpeedModifier: {}", value);
 
     // Read the Pitch Modifier
     getline(file, line);
     value = parseline(line, "PitchModifier", ':');
     result.addConfig("PitchModifier", value);
-	get("logger")->trace("PitchModifier: {}", value);
+	//get("logger")->trace("PitchModifier: {}", value);
 
     // Read the Style
     getline(file, line);
     value = parselinewithcomment(line, "Style", ' ');
     result.addConfig("Style", value);
-	get("logger")->trace("Style: {}", value);
+	//get("logger")->trace("Style: {}", value);
 
     // Read the Volume
     getline(file, line);
     value = parselinewithcomment(line, "Volume", ' ');
     result.addConfig("Volume", value);
-	get("logger")->trace("Volume: {}", value);
+	//get("logger")->trace("Volume: {}", value);
 
     // Read the Compression
     getline(file, line);
     value = parselinewithcomment(line, "Compression", ' ');
     result.addConfig("Compression", value);
-	get("logger")->trace("Compression: {}", value);
+	//get("logger")->trace("Compression: {}", value);
 
     // Read the Pitch Guessing
     getline(file, line);
@@ -95,7 +97,7 @@ ParsedData MapParser::parse(const string& filePath)
     {
         value = line.substr(0,3);
         result.addConfig("PitchGuessing", value);
-       	get("logger")->trace("Pitch Guessing: {}", value);
+       	//get("logger")->trace("Pitch Guessing: {}", value);
     }
 
     // Read the Back Folding
@@ -104,23 +106,23 @@ ParsedData MapParser::parse(const string& filePath)
     {
         value = line.substr(0, 3);
         result.addConfig("BackFolding", value);
-    	get("logger")->trace("Back Folding: {}", value);
+    	//get("logger")->trace("Back Folding: {}", value);
 }
 
     // Read the Fade Out
     getline(file, line);
     value = parselinewithcomment(line, "FadeOut", ' ', 2);
     result.addConfig("FadeOut", value);
-	get("logger")->trace("FadeOut: {}", value);
+	//get("logger")->trace("FadeOut: {}", value);
 
     // Read the Transcriber
     getline(file, line);
     value = parseline(line, "Transcriber", ' ');
     result.addConfig("Transcriber", value);
-	get("logger")->trace("Transcriber: {}", value);
+	//get("logger")->trace("Transcriber: {}", value);
 
     // Write to the log file
-	get("logger")->trace("Parsing Tracks");
+	//get("logger")->trace("Parsing Tracks");
 
     //
     // Read the Instrument Information
@@ -138,14 +140,14 @@ ParsedData MapParser::parse(const string& filePath)
             if (linevector[1] == "begin") 
             {
                 /* we have a new Instrument */
-            	get("logger")->trace("Instrument Begin");
+            	//get("logger")->trace("Instrument Begin");
                 instrument = InstrumentData();
                 continue;
             }
             else if (linevector[1] == "end")
             {
                 /* we have reached the end of the Instrument */
-            	get("logger")->trace("Instrument End");
+            	//get("logger")->trace("Instrument End");
                 result.addInstrument(instrument);
                 continue;
             }           
@@ -156,7 +158,7 @@ ParsedData MapParser::parse(const string& filePath)
         {
             value = trim(linevector[1]);
             instrument.addConfig("ffamp", value);
-        	get("logger")->trace("ffamp: {}", value);
+        	//get("logger")->trace("ffamp: {}", value);
             continue;
         }
 
@@ -165,7 +167,7 @@ ParsedData MapParser::parse(const string& filePath)
         {
             value = trim(linevector[1]);
             instrument.addConfig("ffshift", value);
-        	get("logger")->trace("ffshift: {}", value);
+        	//get("logger")->trace("ffshift: {}", value);
             continue;
         }
 
@@ -174,7 +176,7 @@ ParsedData MapParser::parse(const string& filePath)
         {
             value = line.substr(11);
             instrument.addConfig("ffcoupling", value);
-        	get("logger")->trace("ffcoupling: {}", value);
+        	//get("logger")->trace("ffcoupling: {}", value);
             continue;
         }
 
@@ -183,10 +185,10 @@ ParsedData MapParser::parse(const string& filePath)
         {
             value = trim(linevector[1]);
             instrument.addConfig("polyphony", value);
-        	get("logger")->trace("polyphony amount: {}", value);
+        	//get("logger")->trace("polyphony amount: {}", value);
             value = trim(linevector[2]);
             instrument.addConfig("polyphonydirection", value);
-        	get("logger")->trace("polyphony direction: {}", value);
+        	//get("logger")->trace("polyphony direction: {}", value);
             continue;
         }
 
@@ -195,24 +197,24 @@ ParsedData MapParser::parse(const string& filePath)
         {
             value = trim(linevector[1]);
             instrument.addConfig("instrument", value);
-        	get("logger")->trace("instrument: {}", value);
+        	//get("logger")->trace("instrument: {}", value);
             if (linevector.size() > 2)
             {
                 value = trim(linevector[2]);
                 instrument.addConfig("instrumentstyle", value);
-            	get("logger")->trace("instrument style: {}", value);
+            	//get("logger")->trace("instrument style: {}", value);
             }
             if (linevector.size() > 3)
             {
                 value = trim(linevector[3]);
                 instrument.addConfig("instrumentextended1", value);
-            	get("logger")->trace("instrument extended 1: {}", value);
+            	//get("logger")->trace("instrument extended 1: {}", value);
             }
             if (linevector.size() > 4)
             {
                 value = trim(linevector[4]);
                 instrument.addConfig("instrumentextended2", value);
-            	get("logger")->trace("instrument extended 2: {}", value);
+            	//get("logger")->trace("instrument extended 2: {}", value);
             }
             continue;
         }
@@ -222,12 +224,12 @@ ParsedData MapParser::parse(const string& filePath)
         {
             value = trim(linevector[1]);
             instrument.addConfig("duration", value);
-          	get("logger")->trace("duration: {}", value);
+          	//get("logger")->trace("duration: {}", value);
             if (linevector.size() > 2)
             {
                 value = trim(linevector[2]);
                 instrument.addConfig("durationamount", value);
-            	get("logger")->trace("duration amount: {}", value);
+            	//get("logger")->trace("duration amount: {}", value);
             }
             continue;
         }
@@ -237,7 +239,7 @@ ParsedData MapParser::parse(const string& filePath)
         {
             value = trim(linevector[1]);
             instrument.addConfig("split", value);
-           	get("logger")->trace("split: {}", value);
+           	//get("logger")->trace("split: {}", value);
             continue;
         }
 
@@ -246,10 +248,10 @@ ParsedData MapParser::parse(const string& filePath)
         {
             value = trim(linevector[1]);
             instrument.addConfig("durationsplitlength", value);
-           	get("logger")->trace("durationsplit length: {}", value);
+           	//get("logger")->trace("durationsplit length: {}", value);
             value = trim(linevector[2]);
             instrument.addConfig("durationsplitpart", value);
-           	get("logger")->trace("durationsplit part: {}", value);
+           	//get("logger")->trace("durationsplit part: {}", value);
             continue;
         }
 
@@ -258,10 +260,10 @@ ParsedData MapParser::parse(const string& filePath)
         {
             value = trim(linevector[1]);
             instrument.addConfig("alternatecount", value);
-           	get("logger")->trace("alternate count: {}", value);
+           	//get("logger")->trace("alternate count: {}", value);
             value = trim(linevector[2]);
             instrument.addConfig("alternatepart", value);
-           	get("logger")->trace("alternate partnumber: {}", value);
+           	//get("logger")->trace("alternate partnumber: {}", value);
             continue;
         }
 
@@ -270,7 +272,7 @@ ParsedData MapParser::parse(const string& filePath)
         {
             value = trim(linevector[1]);
             instrument.addConfig("triller", value);
-           	get("logger")->trace("triller: {}", value);
+           	//get("logger")->trace("triller: {}", value);
             continue;
         }
 
@@ -279,10 +281,10 @@ ParsedData MapParser::parse(const string& filePath)
         {
             value = trim(linevector[1]);
             instrument.addConfig("pitchbendinfo", value);
-           	get("logger")->trace("pitchbend freq: {}", value);
+           	//get("logger")->trace("pitchbend freq: {}", value);
             value = trim(linevector[2]);
             instrument.addConfig("pitchbenddepth", value);
-           	get("logger")->trace("pitchbend method: {}", value);
+           	//get("logger")->trace("pitchbend method: {}", value);
             continue;
         }
 
@@ -291,7 +293,7 @@ ParsedData MapParser::parse(const string& filePath)
         {
             value = trim(linevector[1]);
             instrument.addConfig("panning", value);
-           	get("logger")->trace("panning: {}", value);
+           	//get("logger")->trace("panning: {}", value);
             continue;
         }
 
@@ -300,12 +302,12 @@ ParsedData MapParser::parse(const string& filePath)
         {
             value = trim(linevector[1]);
             instrument.addConfig("arpeggio", value);
-           	get("logger")->trace("arpeggio duration: {}", value);
+           	//get("logger")->trace("arpeggio duration: {}", value);
             if (linevector.size() > 2)
             {
                 value = trim(linevector[2]);
                 instrument.addConfig("arpeggioincrement", value);
-               	get("logger")->trace("arpeggio increment: {}", value);
+               	//get("logger")->trace("arpeggio increment: {}", value);
             }
             continue;
         }
@@ -315,10 +317,10 @@ ParsedData MapParser::parse(const string& filePath)
         {
             value = trim(linevector[1]);
             instrument.addConfig("indrum", value);
-           	get("logger")->trace("in drum: {}", value);
+           	//get("logger")->trace("in drum: {}", value);
             value = trim(linevector[2]);
             instrument.addConfig("directmapping", value);
-           	get("logger")->trace("direct: {}", value);
+           	//get("logger")->trace("direct: {}", value);
             continue;
         }
 
@@ -327,7 +329,7 @@ ParsedData MapParser::parse(const string& filePath)
         {
             value = trim(linevector[1]);
             instrument.addConfig("voladjust", value);
-           	get("logger")->trace("voladjust: {}", value);
+           	//get("logger")->trace("voladjust: {}", value);
             continue;
         }
 
@@ -336,10 +338,10 @@ ParsedData MapParser::parse(const string& filePath)
         {
             value = trim(linevector[1]);
             instrument.addConfig("rangestart", value);
-           	get("logger")->trace("range start: {}", value);
+           	//get("logger")->trace("range start: {}", value);
             value = trim(linevector[2]);
             instrument.addConfig("rangeend", value);
-           	get("logger")->trace("range end: {}", value);
+           	//get("logger")->trace("range end: {}", value);
             continue;
         }
 
@@ -348,7 +350,7 @@ ParsedData MapParser::parse(const string& filePath)
         {
             value = trim(linevector[1]);
             instrument.addConfig("align", value);
-           	get("logger")->trace("align: {}", value);
+           	//get("logger")->trace("align: {}", value);
             continue;
         }
 
@@ -357,7 +359,7 @@ ParsedData MapParser::parse(const string& filePath)
         {
             value = "1";
             instrument.addConfig("invert", value);
-           	get("logger")->trace("invert: {}", value);
+           	//get("logger")->trace("invert: {}", value);
             continue;
         }
 
@@ -366,7 +368,7 @@ ParsedData MapParser::parse(const string& filePath)
         {
             value = trim(linevector[1]);
             instrument.addConfig("humanizer", value);
-           	get("logger")->trace("humanizer: {}", value);
+           	//get("logger")->trace("humanizer: {}", value);
             continue;
         }
 
@@ -378,19 +380,19 @@ ParsedData MapParser::parse(const string& filePath)
             track = TrackData();
             value = trim(linevector[1]);
             track.addConfig("track", value);
-           	get("logger")->trace("track: {}", value);
+           	//get("logger")->trace("track: {}", value);
             value = trim(linevector[3]);
             track.addConfig("pitch", value);
-           	get("logger")->trace("pitch: {}", value);
+           	//get("logger")->trace("pitch: {}", value);
             value = trim(linevector[5]);
             track.addConfig("volume", value);
-           	get("logger")->trace("volume: {}", value);
+           	//get("logger")->trace("volume: {}", value);
             value = trim(linevector[7]);
             track.addConfig("delay", value);
-           	get("logger")->trace("delay: {}", value);
+           	//get("logger")->trace("delay: {}", value);
             value = trim(linevector[9]);
             track.addConfig("priority", value);
-           	get("logger")->trace("priority: {}", value);
+           	//get("logger")->trace("priority: {}", value);
             value = "1";
             value2 = "0";
             if (linevector.size() > 11)
@@ -400,8 +402,8 @@ ParsedData MapParser::parse(const string& filePath)
             }
             track.addConfig("divide", value);
             track.addConfig("dividepart", value2);
-           	get("logger")->trace("divide: {}", value);
-           	get("logger")->trace("divide part: {}", value2);
+           	//get("logger")->trace("divide: {}", value);
+           	//get("logger")->trace("divide part: {}", value2);
             value = "0";
             value2 = "0";
             if (linevector.size() > 15)
@@ -411,8 +413,8 @@ ParsedData MapParser::parse(const string& filePath)
             }
             track.addConfig("imfmap", value);
             track.addConfig("isfmap", value2);
-           	get("logger")->trace("imfmap: {}", value);
-           	get("logger")->trace("isfmap: {}", value2);
+           	//get("logger")->trace("imfmap: {}", value);
+           	//get("logger")->trace("isfmap: {}", value2);
 
             // 
             // Add the track to the instrument

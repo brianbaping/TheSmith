@@ -11,16 +11,13 @@
 #include "CommonFunctions.h"
 #include "Options.h"
 #include "MidiFile.h"
-#include "Logger.h"
-#include "spdlog/sinks/stdout_color_sinks.h"
 #include "ParsedData.h"
 #include "FileParser.h"
-
+#include "Logger.h"
 #include <iostream>
 
 using namespace std;
 using namespace smf;
-using namespace spdlog;
 
 
 // Global variables
@@ -40,14 +37,16 @@ int main(int argc, char** argv) {
 	// Process command-line options
 	options.setOptions(argc, argv);
 	checkOptions(options);
+   
+    Logger& logger = Logger::getInstance();
 
 	// Set up logging
 	int debuglevel = options.getInteger("debuglevel");
-	if (debuglevel >= 0) spdlog::basic_logger_mt("logger", "Forge.log");
-	if (debuglevel < 0) spdlog::stdout_color_mt("logger");    
-    
-	// debug levels are 5 - Critical, 4 - Error, 3 - Warn, 2 - Info, 1 - Debug, 0 - Trace, -1 - None
-	spdlog::set_level(static_cast<spdlog::level::level_enum>(debuglevel));  
+	logger.setLogLevel(logger.getLogLevelByIndex(debuglevel));
+	logger.setLogFile("forge.log");
+	
+	logger.log("Firing up the Forge");
+	logger.log("error",Logger::LogLevel::LOG_ERROR);
 
 	// Get the input and output filenames
 	string midifilename;
@@ -60,12 +59,12 @@ int main(int argc, char** argv) {
 		configfilename = trim(options.getString("config"));
 	}
 	catch (const exception& e) {
-		get("logger")->error("Error: {}", e.what());
+		//get("logger")->error("Error: {}", e.what());
 		exit(1);	
 	}
 
 	// Start the program
-	get("logger")->info("Firing up the Forge");   
+	//get("logger")->info("Firing up the Forge");   
 
 	// Parse the config file
 	FileParser fileParser;
@@ -92,7 +91,7 @@ int main(int argc, char** argv) {
 void processFile(const string& inputfilename, const string& outputfilename) {
 
 	// Start processing the file
-	get("logger")->trace("Processing file: {}", inputfilename);
+	//get("logger")->trace("Processing file: {}", inputfilename);
 
 
 	// Open the midi file

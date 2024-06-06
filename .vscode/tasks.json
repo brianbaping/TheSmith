@@ -34,9 +34,7 @@
             "type": "cppbuild",
             "command": "C:\\mingw64\\bin\\g++.exe",
 			"args": [
-				"-Wall",
-				"-Werror",
-				"-pedantic",
+				"-fdiagnostics-color=always",
 				"-g",
 				"${workspaceFolder}\\test\\ParseTest.cpp",
 				"${workspaceFolder}\\src\\*.cpp",

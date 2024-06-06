@@ -3,11 +3,9 @@
 #include "../include/ParsedData.h"
 #include "../include/MapParser.h"
 #include "../include/Logger.h"
-#include "../include/spdlog/sinks/stdout_color_sinks.h"
 
 TEST_CASE("Song Parser Test") {
 
-    spdlog::stdout_color_mt("logger");
     MapParser fileParser;
     ParsedData parsedOutData = fileParser.parse("test.map");  
 
@@ -43,7 +41,6 @@ TEST_CASE("Song Parser Test") {
     CHECK(parsedOutData.Instruments[0].Tracks[0].TrackConfigs["dividepart"] == "0");
     CHECK(parsedOutData.Instruments[0].Tracks[0].TrackConfigs["imfmap"] == "0");
     CHECK(parsedOutData.Instruments[0].Tracks[0].TrackConfigs["isfmap"] == "0");
-
 }
 
 TEST_CASE("Always Blue") {
