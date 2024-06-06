@@ -53,7 +53,6 @@ ParsedData MapParser::parse(const string& filePath)
     // Write to the log file   
 	get("logger")->trace("Parsing file: {}", filePath);
 
-
     // Read the Song Name
     getline(file, line);
     value = parseline(line, "SongName", ':');

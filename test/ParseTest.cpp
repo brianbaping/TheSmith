@@ -2,19 +2,20 @@
 #include "../include/doctest.h"
 #include "../include/ParsedData.h"
 #include "../include/MapParser.h"
+#include "../include/Logger.h"
+#include "../include/spdlog/sinks/stdout_color_sinks.h"
 
 TEST_CASE("testing the factorial function") {
 
-
+    spdlog::stdout_color_mt("logger");
     MapParser fileParser;
     ParsedData parsedOutData = fileParser.parse("test.map");  
 
-    InstrumentData instrumentData;
-    TrackData trackData;
-    parsedOutData.addConfig("author", "John Doe");
-    instrumentData.addConfig("instrument", "guitar");
-    trackData.addConfig("track", "1");   
-    CHECK(parsedOutData.SongConfigs["author"] == "John Doe");
-    CHECK(instrumentData.InstrumentConfigs["instrument"] == "guitar");
-    CHECK(trackData.TrackConfigs["track"] == "1");
+    CHECK(parsedOutData.SongConfigs["SongName"] == "Albatros");
 }
+
+TEST_CASE("Always Blue") {
+
+    CHECK(1 == 1);
+}
+
