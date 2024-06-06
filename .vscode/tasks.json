@@ -25,6 +25,40 @@
 				"isDefault": true
 			},
 			"detail": "compiler: C:\\mingw64\\bin\\g++.exe"
+        },
+        {
+            "label": "Unit Test",
+            "type": "cppbuild",
+            "command": "C:\\mingw64\\bin\\g++.exe",
+			"args": [
+				"-Wall",
+				"-Werror",
+				"-pedantic",
+				"-g",
+				"${workspaceFolder}\\test\\ParseTest.cpp",
+				"${workspaceFolder}\\src\\ParsedData.cpp",
+				"${workspaceFolder}\\src\\ParserFactory.cpp",
+				"${workspaceFolder}\\src\\FileParser.cpp",
+				"${workspaceFolder}\\src\\MapParser.cpp",
+				"${workspaceFolder}\\src\\OreParser.cpp",
+				"${workspaceFolder}\\src\\CommonFunctions.cpp",
+				"-o",
+				"${workspaceFolder}\\test\\UnitTest.exe",
+				"-I",
+				"${workspaceFolder}\\include",
+            ],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "compiler: C:\\mingw64\\bin\\g++.exe"
         }
+
     ]
 }
