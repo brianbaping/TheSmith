@@ -10,7 +10,7 @@
 #include "OreParser.h"
 #include "ParsedData.h"
 #include "CommonFunctions.h"
-//#include "Logger.h"
+#include "Logger.h"
 #include <fstream>
 #include <stdexcept>
 #include <vector>
@@ -41,7 +41,8 @@ ParsedData OreParser::parse(const string& filePath)
     }
 
     // Write to the log file
-	//get("logger")->trace("Parsing file: {}", filePath);
+    Logger& logger = Logger::getInstance();
+    logger.log("Parsing file: " + filePath);
 
     //
     // Variables Used
@@ -71,57 +72,57 @@ ParsedData OreParser::parse(const string& filePath)
     // Song ID
     value = tokens[1]; 
     result.addConfig("SongID", value);
-	//get("logger")->trace("SongID: {}", value);
+    logger.log("SongID: " + value);
 
     // Song Name
     value = tokens[2]; 
     result.addConfig("SongName", value);
-	//get("logger")->trace("SongName: {}", value);
+    logger.log("SongName: " + value);
 
     // Read the Transcriber
     value = tokens[3]; 
     result.addConfig("Transcriber", value);
-	//get("logger")->trace("Transcriber: {}", value);
+    logger.log("Transcriber: " + value);
 
     // Read the Speed Modifier
     value = tokens[4]; 
     result.addConfig("SpeedModifier", value);
-	//get("logger")->trace("SpeedModifier: {}", value);
+    logger.log("SpeedModifier: " + value);
 
     // Read the Pitch Modifier
     value = tokens[5]; 
     result.addConfig("PitchModifier", value);
-	//get("logger")->trace("PitchModifier: {}", value);
+    logger.log("PitchModifier: " + value);
 
     // Read the Style
     value = tokens[6]; 
     result.addConfig("Style", value);
-	//get("logger")->trace("Style: {}", value);
+    logger.log("Style: " + value);
 
     // Read the Volume
     value = tokens[7]; 
     result.addConfig("Volume", value);
-	//get("logger")->trace("Volume: {}", value);
+    logger.log("Volume: " + value);
 
     // Read the Compression
     value = tokens[8]; 
     result.addConfig("Compression", value);
-	//get("logger")->trace("Compression: {}", value);
+    logger.log("Compression: " + value);
 
     // Read the Pitch Guessing
     value = tokens[9]; 
     result.addConfig("PitchGuessing", value);
-	//get("logger")->trace("PitchGuessing: {}", value);
+    logger.log("PitchGuessing: " + value);
 
     // Read the Back Folding
     value = tokens[10]; 
     result.addConfig("BackFolding", value);
-	//get("logger")->trace("BackFolding: {}", value);
+    logger.log("BackFolding: " + value);
 
     // Read the Fade Out
     value = tokens[11]; 
     result.addConfig("FadeOut", value);
-	//get("logger")->trace("FadeOut: {}", value);
+    logger.log("FadeOut: " + value);
 
     //
     // Read the rest of the file in a loop
@@ -136,7 +137,7 @@ ParsedData OreParser::parse(const string& filePath)
             if (tokens[1] == "END") 
             {
                 /* we have reached the end of the Song */
-            	//get("logger")->trace("End of Song");
+                logger.log("End of Song");
                 break;
             }
         }
@@ -163,82 +164,82 @@ ParsedData OreParser::parse(const string& filePath)
             // Read the SongID
             value = tokens[1]; 
             instrument.addConfig("SongID", value);
-        	//get("logger")->trace("\tSongID: {}", value);
+            logger.log("\tSongID: " + value);
 
             // Read the Instrument ID
             value = tokens[2]; 
             instrument.addConfig("InstrumentID", value);
-        	//get("logger")->trace("\tInstrumentID: {}", value);
+            logger.log("\tInstrumentID: " + value);
 
             // Read the ABC Title
             value = tokens[3]; 
             instrument.addConfig("ABCTitle", value);
-        	//get("logger")->trace("\tABCTitler: {}", value);
+            logger.log("\tABC Title: " + value);
 
             // Read the ABC Index
             value = tokens[4]; 
             instrument.addConfig("ABCIndex", value);
-        	//get("logger")->trace("\tABCIndex: {}", value);
+            logger.log("\tABC Index: " + value);
 
             // Read the Volume Adjust
             value = tokens[5]; 
             instrument.addConfig("VolumeAdjust", value);
-        	//get("logger")->trace("\tVolumeAdjust: {}", value);
+            logger.log("\tVolume Adjust: " + value);
 
             // Read the Polyphony
             value = tokens[6]; 
             instrument.addConfig("Polyphony", value);
-        	//get("logger")->trace("\tPolyphony: {}", value);
+            logger.log("\tPolyphony: " + value);
 
             // Read the Polyphony Direction
             value = tokens[7]; 
             instrument.addConfig("PolyphonyDirection", value);
-        	//get("logger")->trace("\tPolyphonyDirection: {}", value);
+            logger.log("\tPolyphony Direction: " + value);
 
             // Read the Duration
             value = tokens[8]; 
             instrument.addConfig("Duration", value);
-        	//get("logger")->trace("\tDuration: {}", value);
+            logger.log("\tDuration: " + value);
 
             // Read the Duration Length
             value = tokens[9]; 
             instrument.addConfig("Duration Length", value);
-        	//get("logger")->trace("\tDuration Length: {}", value);
+            logger.log("\tDuration Length: " + value);
 
             // Read the Panning 1
             value = tokens[10]; 
             instrument.addConfig("Panning1", value);
-        	//get("logger")->trace("\tPanning1: {}", value);
+            logger.log("\tPanning1: " + value);
 
             // Read the Panning 2
             value = tokens[11]; 
             instrument.addConfig("Panning2", value);
-        	//get("logger")->trace("\tPanning2: {}", value);
+            logger.log("\tPanning2: " + value);
 
             // Read the Panning 3
             value = tokens[12]; 
             instrument.addConfig("Panning3", value);
-        	//get("logger")->trace("\tPanning3: {}", value);
+            logger.log("\tPanning3: " + value);
 
             // Read the ffAmp
             value = tokens[13]; 
             instrument.addConfig("ffAmp", value);
-        	//get("logger")->trace("\tffAmp: {}", value);
+            logger.log("\tffAmp: " + value);
 
             // Read the ffShift
             value = tokens[14]; 
             instrument.addConfig("ffShift", value);
-        	//get("logger")->trace("\tffShift: {}", value);
+            logger.log("\tffShift: " + value);
 
             // Read the ffCoupling
             value = tokens[15]; 
             instrument.addConfig("ffCoupling", value);
-        	//get("logger")->trace("\tffCoupling: {}", value);
+            logger.log("\tffCoupling: " + value);
 
             // Read the Instrument
             value = tokens[16]; 
             instrument.addConfig("Instrument", value);
-        	//get("logger")->trace("\tInstrument: {}", value);
+            logger.log("\tInstrument: " + value);
 
             continue;
         }
@@ -257,57 +258,57 @@ ParsedData OreParser::parse(const string& filePath)
             // Read the Instrument ID
             value = tokens[1]; 
             track.addConfig("InstrumentID", value);
-        	//get("logger")->trace("\t\tInstrumentID: {}", value);
+            logger.log("\t\tInstrumentID: " + value);
 
             // Read the Midi Track ID
             value = tokens[2]; 
             track.addConfig("MidiTrackID", value);
-        	//get("logger")->trace("\t\tMidiTrackID: {}", value);
+            logger.log("\t\tMidiTrackID: " + value);
 
             // Read the Mid Track Number
             value = tokens[3]; 
             track.addConfig("MidTrackNumber", value);
-        	//get("logger")->trace("\t\tMidTrackNumber: {}", value);
+            logger.log("\t\tMidTrackNumber: " + value);
 
             // Read the Pitch
             value = tokens[4]; 
             track.addConfig("Pitch", value);
-        	//get("logger")->trace("\t\tPitch: {}", value);
+            logger.log("\t\tPitch: " + value);
 
             // Read the Volume
             value = tokens[5]; 
             track.addConfig("Volume", value);
-        	//get("logger")->trace("\t\tVolume: {}", value);
+            logger.log("\t\tVolume: " + value);
 
             // Read the Delay
             value = tokens[6]; 
             track.addConfig("Delay", value);
-        	//get("logger")->trace("\t\tDelay: {}", value);
+            logger.log("\t\tDelay: " + value);
 
             // Read the Priority
             value = tokens[7]; 
             track.addConfig("Priority", value);
-        	//get("logger")->trace("\t\tPriority: {}", value);
+            logger.log("\t\tPriority: " + value);
 
             // Read the Divide
             value = tokens[8]; 
             track.addConfig("Divide", value);
-        	//get("logger")->trace("\t\tDivide: {}", value);
+            logger.log("\t\tDivide: " + value);
 
             // Read the Divide Part
             value = tokens[9]; 
             track.addConfig("DividePart", value);
-        	//get("logger")->trace("\t\tDividePart: {}", value);
+            logger.log("\t\tDividePart: " + value);
 
             // Read the IMFMAP
             value = tokens[10]; 
             track.addConfig("IMFMAP", value);
-        	//get("logger")->trace("\t\tIMFMAP: {}", value);
+            logger.log("\t\tIMFMAP: " + value);
 
             // Read the ISFMAP
             value = tokens[11]; 
             track.addConfig("ISFMAP", value);
-        	//get("logger")->trace("\t\tISFMAP: {}", value);
+            logger.log("\t\tISFMAP: " + value);
 
             // Add the track to the instrument
             instrument.addTrack(track);
