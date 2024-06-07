@@ -10,9 +10,11 @@ class Logger {
 public:
     // Enum for log levels
     enum LogLevel {
-        NONE,
-        LOG_ERROR,
-        LOG_INFO
+        NONE,           // - 0
+        LOG_ERROR,      // - 1
+        LOG_DEBUG,      // - 2
+        LOG_INFO,       // - 3
+        LOG_TRACE       // - 4
     };
 
     // Static method to get the single instance of Logger
@@ -29,7 +31,7 @@ public:
     LogLevel getLogLevel();
 
     // Method to log messages with a specific log level (default is INFO)
-    void log(const std::string& message, LogLevel level = LOG_INFO);
+    void log(const std::string& message, LogLevel level = LOG_TRACE);
 
     // Method to set log file
     void setLogFile(const std::string& filename);

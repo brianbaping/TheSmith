@@ -82,7 +82,9 @@ Logger::LogLevel Logger::getLogLevelByIndex(int index) {
     switch(index) {
         case 0: return Logger::LogLevel::NONE;
         case 1: return Logger::LogLevel::LOG_ERROR;
-        case 2: return Logger::LogLevel::LOG_INFO;
+        case 2: return Logger::LogLevel::LOG_DEBUG;
+        case 3: return Logger::LogLevel::LOG_INFO;
+        case 4: return Logger::LogLevel::LOG_TRACE;
         default: throw out_of_range("Invalid index for LogLevel");
     }
 }

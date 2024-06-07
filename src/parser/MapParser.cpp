@@ -51,8 +51,8 @@ ParsedData MapParser::parse(const string& filePath)
     string value2;
 
     // Write to the log file   
-	//get("logger")->trace("Parsing file: {}", filePath);
     Logger& logger = Logger::getInstance();
+    logger.log("Parsing file: " + filePath);
 
     // Read the Song Name
     getline(file, line);

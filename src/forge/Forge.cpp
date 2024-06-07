@@ -45,9 +45,6 @@ int main(int argc, char** argv) {
 	logger.setLogLevel(logger.getLogLevelByIndex(debuglevel));
 	logger.setLogFile("forge.log");
 	
-	logger.log("Firing up the Forge");
-	logger.log("error",Logger::LogLevel::LOG_ERROR);
-
 	// Get the input and output filenames
 	string midifilename;
 	string outputfilename;
@@ -59,12 +56,12 @@ int main(int argc, char** argv) {
 		configfilename = trim(options.getString("config"));
 	}
 	catch (const exception& e) {
-		//get("logger")->error("Error: {}", e.what());
+		logger.log("Error: " + string(e.what()), Logger::LogLevel::LOG_ERROR);
 		exit(1);	
 	}
 
 	// Start the program
-	//get("logger")->info("Firing up the Forge");   
+	logger.log("Firing up the Forge");
 
 	// Parse the config file
 	FileParser fileParser;
