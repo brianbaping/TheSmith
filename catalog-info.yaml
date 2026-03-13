@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: TheSmith
+  description: "TheSmith C++ project"
+  annotations:
+    github.com/project-slug: brianbaping/TheSmith
+spec:
+  type: service
+  lifecycle: experimental
+  owner: user:default/brianbaping
